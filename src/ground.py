@@ -1,4 +1,6 @@
 
+from src.constants import *
+
 import pygame
 
 class Ground(pygame.sprite.Sprite):

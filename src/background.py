@@ -1,4 +1,6 @@
 
+from src.constants import *
+
 import pygame
 
 class Background(pygame.sprite.Sprite):
@@ -7,5 +9,5 @@ class Background(pygame.sprite.Sprite):
         super().__init__()
 
         self.image = pygame.image.load('./src/graphics/terrain/background.png').convert()
-        self.image = pygame.transform.scale(self.image, (800, 400))
+        self.image = pygame.transform.scale(self.image, (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.rect = self.image.get_rect()
