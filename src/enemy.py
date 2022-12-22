@@ -10,6 +10,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
+        self.velocity = 6
 
     def animate(self):
         pass
@@ -29,7 +30,6 @@ class Slime(Enemy):
 
     def __init__(self):
         super().__init__()
-
         self.frame = 0
         self.walk = (
             pygame.image.load('src/graphics/slime/slime_walk1.png').convert_alpha(),
@@ -46,7 +46,7 @@ class Slime(Enemy):
         self.image = self.walk[int(self.frame)]
 
     def movement(self):
-        self.rect.x -= 6
+        self.rect.x -= self.velocity
 
     def destroy(self):
         if self.rect.right < 0:
@@ -56,7 +56,6 @@ class Pumpkin(Enemy):
 
     def __init__(self):
         super().__init__()
-
         self.frame = 0
         self.walk = (
             pygame.image.load('src/graphics/pumpkin/pumpkin_walk1.png').convert_alpha(),
@@ -76,7 +75,7 @@ class Pumpkin(Enemy):
         self.rect.bottom = GROUND_HEIGHT
 
     def movement(self):
-        self.rect.x -= 6
+        self.rect.x -= self.velocity
 
     def destroy(self):
         if self.rect.right < 0:
@@ -86,7 +85,6 @@ class Cactus(Enemy):
 
     def __init__(self):
         super().__init__()
-
         self.frame = 0
         self.walk = (
             pygame.image.load('src/graphics/cactus/cactus_walk1.png').convert_alpha(),
@@ -106,7 +104,7 @@ class Cactus(Enemy):
         self.rect.bottom = GROUND_HEIGHT
 
     def movement(self):
-        self.rect.x -= 6
+        self.rect.x -= self.velocity
 
     def destroy(self):
         if self.rect.right < 0:
@@ -116,7 +114,6 @@ class Radish(Enemy):
 
     def __init__(self):
         super().__init__()
-
         self.frame = 0
         self.walk = (
             pygame.image.load('src/graphics/radish/radish_fly1.png').convert_alpha(),
@@ -134,7 +131,7 @@ class Radish(Enemy):
         self.rect.bottom = SKY_HEIGHT
 
     def movement(self):
-        self.rect.x -= 6
+        self.rect.x -= self.velocity
 
     def destroy(self):
         if self.rect.right < 0:

@@ -17,14 +17,14 @@
 - [x] Enemy
   - [x] Movement and animation
   - [x] Sprite variety
-- [] Audio
-  - [] Background music
-  - [] Sound effects
-- [] Game Mechanics
-  - [] Score system
-  - [] Main menu
-  - [] Pause menu
-  - [] Scaling difficulty
+- [ ] Audio
+  - [ ] Background music
+  - [ ] Sound effects
+- [ ] Game Mechanics
+  - [X] Score system
+  - [ ] Main menu
+  - [ ] Pause menu
+  - [ ] Scaling difficulty
 
 ## Credits
 

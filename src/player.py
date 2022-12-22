@@ -7,7 +7,6 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-
         self.frame = 0
         self.walk = (
             pygame.image.load('src/graphics/player/player_walk1.png').convert_alpha(),
@@ -39,7 +38,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom < GROUND_HEIGHT:
             self.image = self.jump
         else:
-            self.frame += 0.1
+            self.frame += 0.13
             if self.frame >= len(self.walk):
                 self.frame = 0
             self.image = self.walk[int(self.frame)]
