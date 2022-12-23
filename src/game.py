@@ -1,5 +1,6 @@
 
 from src.constants import *
+from src.title import TitleBackground, TitleText, TitleDescription
 from src.terrain import Background, Ground, Grass, Tree
 from src.player import Player
 from src.enemy import Slime, Pumpkin, Cactus, Radish
@@ -28,7 +29,7 @@ def game():
     #
 
     running = True
-    state = 'play'
+    state = 'menu'
 
     #
     # Audio
@@ -44,7 +45,12 @@ def game():
     # Sprites
     #
 
-    background = pygame.sprite.GroupSingle()
+    title_menu = pygame.sprite.Group()
+    title_menu.add(TitleBackground())
+    title_menu.add(TitleText())
+    title_menu.add(TitleDescription())
+
+    background = pygame.sprite.Group()
     background.add(Background())
     
     ground = pygame.sprite.Group()
@@ -82,7 +88,15 @@ def game():
             background.draw(screen)
             ground.draw(screen)
             player.draw(screen)
+            title_menu.draw(screen)
 
+            # Allows for infinitely scrolling ground
+            if len(ground.sprites()) < 2:
+                new_ground = Ground()
+                new_ground.rect.left = ground.sprites()[0].rect.right
+                ground.add(new_ground)
+
+            ground.update()
             player.update()
 
         # Gameplay State
@@ -117,23 +131,44 @@ def game():
         elif state == 'pause':
             pass
 
+        # Death Menu State
+        elif state == 'death':
+            pass
+
+        # Invalid Game State
+        else:
+            raise AttributeError('Invalid game state!')
+
         # Event Loop
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
                 running = False
 
-            if state == 'play' and event.type == spawn_enemy:
-                enemies.add(random.choice([
-                    Slime(),
-                    Pumpkin(),
-                    Cactus(),
-                    Radish()
-                ]))
+            if state == 'menu':
+
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    state = 'play'
+
+            elif state == 'play':
+
+                if event.type == spawn_enemy:
+                    enemies.add(random.choice([
+                        Slime(),
+                        Pumpkin(),
+                        Cactus(),
+                        Radish()
+                    ]))
+                
+                if event.type == spawn_tree:
+                    foliage.add(Tree())
+                
+                if event.type == spawn_grass:
+                    foliage.add(Grass())
             
-            if state == 'play' and event.type == spawn_tree:
-                foliage.add(Tree())
-            
-            if state == 'play' and event.type == spawn_grass:
-                foliage.add(Grass())
+            elif state == 'pause':
+                pass
+
+            elif state == 'dead':
+                pass
 

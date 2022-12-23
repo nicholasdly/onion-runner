@@ -22,9 +22,11 @@
   - [x] Sound effects
 - [ ] Game Mechanics
   - [x] Score system
-  - [ ] Main menu
+  - [X] Main menu
   - [ ] Pause menu
-  - [ ] Scaling difficulty
+  - [ ] Death menu
+  - [ ] Increasing difficulty
+  - [ ] Multiple lives
 
 ## Credits
 
