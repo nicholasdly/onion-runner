@@ -2,6 +2,7 @@
 from src.constants import *
 from src.title import TitleBackground, TitleText, TitlePlay, TitlePause
 from src.pause import PauseBackground, PauseText, PausePlay
+from src.death import DeathBackground, DeathText, DeathPlay
 from src.terrain import Background, Ground, Grass, Tree
 from src.player import Player
 from src.enemy import Slime, Pumpkin, Cactus, Radish
@@ -56,6 +57,11 @@ def game():
     pause_menu.add(PauseBackground())
     pause_menu.add(PauseText())
     pause_menu.add(PausePlay())
+
+    death_menu = pygame.sprite.Group()
+    death_menu.add(DeathBackground())
+    death_menu.add(DeathText())
+    death_menu.add(DeathPlay())
 
     background = pygame.sprite.Group()
     background.add(Background())
@@ -130,9 +136,9 @@ def game():
 
             # Check for player-enemy collisions
             if colliding(player.sprite, enemies):
-                score.sprite.reset()
-                enemies.empty()
+                player.sprite.die()
                 collision_sound.play()
+                state = 'death'
 
         # Pause Menu State
         elif state == 'pause':
@@ -147,7 +153,14 @@ def game():
 
         # Death Menu State
         elif state == 'death':
-            pass
+            
+            background.draw(screen)
+            ground.draw(screen)
+            foliage.draw(screen)
+            player.draw(screen)
+            enemies.draw(screen)
+            score.draw(screen)
+            death_menu.draw(screen)
 
         # Invalid Game State
         else:
@@ -188,6 +201,11 @@ def game():
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     state = 'play'
 
-            elif state == 'dead':
-                pass
+            elif state == 'death':
+                
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    player.sprite.reset()
+                    enemies.empty()
+                    score.sprite.reset()
+                    state = 'play'
 

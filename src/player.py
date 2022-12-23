@@ -15,6 +15,7 @@ class Player(pygame.sprite.Sprite):
             pygame.image.load('src/graphics/player/player_walk4.png').convert_alpha(),
         )
         self.jump = pygame.image.load('src/graphics/player/player_jump.png').convert_alpha()
+        self.death = pygame.image.load('src/graphics/player/player_death.png').convert_alpha()
 
         self.jump_sound = pygame.mixer.Sound('src/audio/jump.wav')
 
@@ -50,4 +51,11 @@ class Player(pygame.sprite.Sprite):
         self.input()
         self.physics()
         self.animate()
+
+    def die(self):
+        self.image = self.death
+
+    def reset(self):
+        self.velocity = 0
+        self.rect.bottom = GROUND_HEIGHT
         

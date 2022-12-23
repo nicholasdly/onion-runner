@@ -23,8 +23,8 @@
 - [ ] Game Mechanics
   - [x] Score system
   - [X] Main menu
-  - [ ] Pause menu
-  - [ ] Death menu
+  - [X] Pause menu
+  - [X] Death menu
   - [ ] Increasing difficulty
   - [ ] Multiple lives
 
