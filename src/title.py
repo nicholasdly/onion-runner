@@ -14,15 +14,15 @@ class TitleBackground(pygame.sprite.Sprite):
 
 class TitleText(pygame.sprite.Sprite):
 
-    FONT = pygame.font.Font('src/font/PlayMeGames.ttf', 50)
+    FONT = pygame.font.Font('src/font/PlayMeGames.ttf', 60)
     COLOR = '#202020'
 
     def __init__(self):
         super().__init__()
         self.image = self.FONT.render(GAME_TITLE, False, self.COLOR)
-        self.rect = self.image.get_rect(center=(469, 140))
+        self.rect = self.image.get_rect(center=(469, 120))
 
-class TitleDescription(pygame.sprite.Sprite):
+class TitlePlay(pygame.sprite.Sprite):
 
     FONT = pygame.font.Font('src/font/PlayMeGames.ttf', 35)
     TEXT = 'Press SPACE to play!'
@@ -31,4 +31,15 @@ class TitleDescription(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = self.FONT.render(self.TEXT, False, self.COLOR)
-        self.rect = self.image.get_rect(center=(469, 210))
+        self.rect = self.image.get_rect(center=(469, 190))
+
+class TitlePause(pygame.sprite.Sprite):
+
+    FONT = pygame.font.Font('src/font/PlayMeGames.ttf', 35)
+    TEXT = 'Press ESC to pause!'
+    COLOR = '#202020'
+
+    def __init__(self):
+        super().__init__()
+        self.image = self.FONT.render(self.TEXT, False, self.COLOR)
+        self.rect = self.image.get_rect(center=(469, 240))

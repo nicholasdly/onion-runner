@@ -1,6 +1,7 @@
 
 from src.constants import *
-from src.title import TitleBackground, TitleText, TitleDescription
+from src.title import TitleBackground, TitleText, TitlePlay, TitlePause
+from src.pause import PauseBackground, PauseText, PausePlay
 from src.terrain import Background, Ground, Grass, Tree
 from src.player import Player
 from src.enemy import Slime, Pumpkin, Cactus, Radish
@@ -28,8 +29,8 @@ def game():
     # Game State
     #
 
-    running = True
-    state = 'menu'
+    running = True  # Game active state (open, closed)
+    state = 'menu'  # Game instance state (title menu, gameplay, pause menu)
 
     #
     # Audio
@@ -48,7 +49,13 @@ def game():
     title_menu = pygame.sprite.Group()
     title_menu.add(TitleBackground())
     title_menu.add(TitleText())
-    title_menu.add(TitleDescription())
+    title_menu.add(TitlePlay())
+    title_menu.add(TitlePause())
+
+    pause_menu = pygame.sprite.Group()
+    pause_menu.add(PauseBackground())
+    pause_menu.add(PauseText())
+    pause_menu.add(PausePlay())
 
     background = pygame.sprite.Group()
     background.add(Background())
@@ -129,7 +136,14 @@ def game():
 
         # Pause Menu State
         elif state == 'pause':
-            pass
+
+            background.draw(screen)
+            ground.draw(screen)
+            foliage.draw(screen)
+            player.draw(screen)
+            enemies.draw(screen)
+            score.draw(screen)
+            pause_menu.draw(screen)
 
         # Death Menu State
         elif state == 'death':
@@ -152,6 +166,9 @@ def game():
 
             elif state == 'play':
 
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    state = 'pause'
+
                 if event.type == spawn_enemy:
                     enemies.add(random.choice([
                         Slime(),
@@ -167,7 +184,9 @@ def game():
                     foliage.add(Grass())
             
             elif state == 'pause':
-                pass
+                
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    state = 'play'
 
             elif state == 'dead':
                 pass
