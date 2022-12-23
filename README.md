@@ -22,9 +22,9 @@
   - [x] Sound effects
 - [ ] Game Mechanics
   - [x] Score system
-  - [X] Main menu
-  - [X] Pause menu
-  - [X] Death menu
+  - [x] Main menu
+  - [x] Pause menu
+  - [x] Death menu
   - [ ] Increasing difficulty
   - [ ] Multiple lives
 
