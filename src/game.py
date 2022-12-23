@@ -16,7 +16,6 @@ def colliding(sprite: pygame.sprite, sprite_group: pygame.sprite.Group) -> bool:
 def game():
     pygame.init()
     pygame.display.set_caption(GAME_TITLE)
-
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode(
         (SCREEN_WIDTH, SCREEN_HEIGHT),
@@ -24,8 +23,26 @@ def game():
         vsync=1
     )
 
+    #
+    # Game State
+    #
+
     running = True
     state = 'play'
+
+    #
+    # Audio
+    #
+
+    background_music = pygame.mixer.Sound('src/audio/music.wav')
+    background_music.set_volume(0.3)
+    background_music.play(loops=-1)
+
+    collision_sound = pygame.mixer.Sound('src/audio/reset.wav')
+
+    #
+    # Sprites
+    #
 
     background = pygame.sprite.GroupSingle()
     background.add(Background())
@@ -43,6 +60,10 @@ def game():
     score = pygame.sprite.GroupSingle()
     score.add(Score())
 
+    #
+    # Gameplay Events
+    #
+
     spawn_enemy = pygame.USEREVENT + 1
     pygame.time.set_timer(spawn_enemy, ENEMY_SPAWN_RATE)
 
@@ -58,7 +79,11 @@ def game():
 
         # Main Menu State
         if state == 'menu':
-            pass
+            background.draw(screen)
+            ground.draw(screen)
+            player.draw(screen)
+
+            player.update()
 
         # Gameplay State
         elif state == 'play':
@@ -86,6 +111,7 @@ def game():
             if colliding(player.sprite, enemies):
                 score.sprite.reset()
                 enemies.empty()
+                collision_sound.play()
 
         # Pause Menu State
         elif state == 'pause':

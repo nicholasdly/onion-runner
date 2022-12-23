@@ -17,11 +17,11 @@
 - [x] Enemy
   - [x] Movement and animation
   - [x] Sprite variety
-- [ ] Audio
-  - [ ] Background music
-  - [ ] Sound effects
+- [x] Audio
+  - [x] Background music
+  - [x] Sound effects
 - [ ] Game Mechanics
-  - [X] Score system
+  - [x] Score system
   - [ ] Main menu
   - [ ] Pause menu
   - [ ] Scaling difficulty

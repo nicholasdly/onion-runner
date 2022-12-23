@@ -16,6 +16,8 @@ class Player(pygame.sprite.Sprite):
         )
         self.jump = pygame.image.load('src/graphics/player/player_jump.png').convert_alpha()
 
+        self.jump_sound = pygame.mixer.Sound('src/audio/jump.wav')
+
         self.image = self.walk[self.frame]
         self.rect = self.image.get_rect(midbottom=(100, GROUND_HEIGHT))
 
@@ -26,6 +28,7 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and self.rect.bottom >= GROUND_HEIGHT:
             self.velocity = -20
+            self.jump_sound.play()
 
     def physics(self):
         self.velocity += self.gravity
